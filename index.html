@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harshitha G — Student Developer Portfolio</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            carbon: {
+              950: '#070a0e',
+              900: '#0d1117',
+              850: '#111620',
+              800: '#161b22',
+              700: '#21262d',
+              600: '#30363d',
+            },
+            emerald: {
+              neon: '#10b981',
+              glow: '#059669',
+              accent: '#34d399',
+            },
+            lime: {
+              neon: '#a3e635',
+              bright: '#84cc16',
+            }
+          },
+          fontFamily: {
+            mono: ['"JetBrains Mono"', 'Fira Code', 'Courier New', 'monospace'],
+            sans: ['"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          animation: {
+            'radar-ping': 'radarPing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite',
+          },
+          keyframes: {
+            radarPing: {
+              '70%, 100%': {
+                transform: 'scale(2.4)',
+                opacity: '0',
+              },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbar matching Cyber-Emerald palette */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d1117;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #161b22;
+      border-radius: 4px;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(16, 185, 129, 0.45);
+    }
+
+    /* 3D Perspective Card Container */
+    .project-card-wrapper {
+      perspective: 1000px;
+    }
+    .tilt-card {
+      transform-style: preserve-3d;
+      will-change: transform, box-shadow;
+      transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.45s ease, border-color 0.3s ease;
+    }
+    .tilt-card.is-tilting {
+      transition: transform 0.08s ease-out, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .glare-overlay {
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+  </style>
+</head>
+<body class="bg-[#0d1117] text-zinc-100 font-sans antialiased overflow-x-hidden selection:bg-emerald-500/30 selection:text-emerald-200">
+
+  <!-- ========================================== -->
+  <!-- 1. FLOATING FROSTED-GLASS NAVIGATION BAR   -->
+  <!-- ========================================== -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-4 transition-all duration-300">
+    <div id="nav-container" class="max-w-7xl mx-auto rounded-2xl bg-[#0d1117]/75 backdrop-blur-xl border border-emerald-500/20 py-3.5 px-5 sm:px-7 shadow-[0_8px_32px_rgba(0,0,0,0.65)] shadow-emerald-950/20 transition-all duration-300">
+      <div class="flex items-center justify-between">
+        
+        <!-- Brand / Name Logo -->
+        <a href="#" class="flex items-center gap-3 group focus:outline-none">
+          <div class="relative flex items-center justify-center w-10 h-10 rounded-xl bg-[#161b22] border border-emerald-500/40 group-hover:border-emerald-400 group-hover:shadow-[0_0_15px_rgba(16,185,129,0.4)] transition-all duration-300 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/15 via-transparent to-lime-500/15 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <span class="font-mono font-bold text-sm text-emerald-400 group-hover:text-lime-300 transition-colors tracking-tighter">
+              &lt;HG/&gt;
+            </span>
+          </div>
+
+          <div class="flex flex-col text-left">
+            <div class="flex items-center gap-1.5">
+              <span class="font-bold text-base sm:text-lg tracking-tight text-white group-hover:text-emerald-300 transition-colors">
+                Harshitha G
+              </span>
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 group-hover:bg-lime-400 animate-pulse"></span>
+            </div>
+            <span class="font-mono text-[10px] text-emerald-400/80 tracking-wider">
+              PORTFOLIO.DEV
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-1 bg-[#161b22]/70 p-1.5 rounded-xl border border-emerald-500/15">
+          <a href="#about" class="nav-link px-4 py-1.5 rounded-lg text-sm font-medium text-zinc-300 hover:text-white hover:bg-[#21262d]/60 transition-colors">About</a>
+          <a href="#projects" class="nav-link px-4 py-1.5 rounded-lg text-sm font-medium text-zinc-300 hover:text-white hover:bg-[#21262d]/60 transition-colors">Projects</a>
+          <a href="#skills" class="nav-link px-4 py-1.5 rounded-lg text-sm font-medium text-zinc-300 hover:text-white hover:bg-[#21262d]/60 transition-colors">Skills</a>
+          <a href="#campus-life" class="nav-link px-4 py-1.5 rounded-lg text-sm font-medium text-emerald-300 bg-emerald-500/10 transition-colors">Campus Life</a>
+          <a href="#contact" class="nav-link px-4 py-1.5 rounded-lg text-sm font-medium text-zinc-300 hover:text-white hover:bg-[#21262d]/60 transition-colors">Contact</a>
+        </nav>
+
+        <!-- Right Action Button / Terminal Chip (Desktop) -->
+        <div class="hidden md:flex items-center gap-3">
+          <div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#161b22] border border-emerald-500/20 text-xs font-mono text-emerald-400/90">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>AIML @ KSIT</span>
+          </div>
+
+          <a href="#contact" class="group relative overflow-hidden px-4 py-2 rounded-xl text-xs font-semibold uppercase font-mono text-[#0d1117] bg-gradient-to-r from-emerald-400 to-lime-400 hover:from-emerald-300 hover:to-lime-300 transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.35)] hover:shadow-[0_0_22px_rgba(163,230,53,0.5)] transform hover:-translate-y-0.5">
+            <span class="flex items-center gap-1.5">
+              <span>Connect</span>
+              <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+
+        <!-- Mobile Hamburger Button -->
+        <button id="mobile-menu-btn" class="p-2.5 rounded-xl bg-[#161b22] border border-emerald-500/30 text-emerald-400 hover:text-white focus:outline-none md:hidden transition-colors" aria-label="Toggle navigation">
+          <svg id="hamburger-icon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg id="close-icon" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+      </div>
+
+      <!-- Mobile Dropdown Navigation -->
+      <div id="mobile-menu" class="hidden md:hidden mt-4 pt-4 border-t border-emerald-500/20 flex-col gap-2">
+        <a href="#about" class="mobile-link px-4 py-2.5 rounded-xl text-sm font-medium text-zinc-200 hover:bg-[#161b22] hover:text-emerald-300 transition-colors flex justify-between">
+          <span>About</span>
+          <span class="font-mono text-xs text-emerald-500/60">→</span>
+        </a>
+        <a href="#projects" class="mobile-link px-4 py-2.5 rounded-xl text-sm font-medium text-zinc-200 hover:bg-[#161b22] hover:text-emerald-300 transition-colors flex justify-between">
+          <span>Projects</span>
+          <span class="font-mono text-xs text-emerald-500/60">→</span>
+        </a>
+        <a href="#skills" class="mobile-link px-4 py-2.5 rounded-xl text-sm font-medium text-zinc-200 hover:bg-[#161b22] hover:text-emerald-300 transition-colors flex justify-between">
+          <span>Skills</span>
+          <span class="font-mono text-xs text-emerald-500/60">→</span>
+        </a>
+        <a href="#campus-life" class="mobile-link px-4 py-2.5 rounded-xl text-sm font-medium text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 transition-colors flex justify-between">
+          <span>Campus Life</span>
+          <span class="font-mono text-xs text-emerald-400">→</span>
+        </a>
+        <a href="#contact" class="mobile-link px-4 py-2.5 rounded-xl text-sm font-medium text-zinc-200 hover:bg-[#161b22] hover:text-emerald-300 transition-colors flex justify-between">
+          <span>Contact</span>
+          <span class="font-mono text-xs text-emerald-500/60">→</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- 2. OPENING 'HERO' INTRO SCREEN             -->
+  <!-- ========================================== -->
+  <section class="relative min-h-screen w-full flex items-center justify-center pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#0d1117]">
+    
+    <!-- HTML5 Animated Matrix-Dot Grid Canvas -->
+    <canvas id="matrix-canvas" class="absolute inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- Cyber-Emerald Ambient Vignette & Radial Aura (Zero Blue Gradients) -->
+    <div class="absolute inset-0 pointer-events-none z-0">
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] sm:w-[750px] h-[350px] sm:h-[450px] bg-gradient-to-b from-emerald-500/12 via-lime-500/5 to-transparent blur-3xl rounded-full"></div>
+      <div class="absolute inset-0 bg-radial-gradient from-transparent via-[#0d1117]/50 to-[#0d1117]"></div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="relative z-10 max-w-5xl mx-auto flex flex-col items-center text-center">
+
+      <!-- Status Badge: Animated Blinking Radar Pill -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#161b22]/90 border border-emerald-500/30 text-emerald-300 shadow-[0_0_20px_rgba(16,185,129,0.15)] backdrop-blur-md mb-8 hover:border-emerald-400/60 transition-colors duration-300">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400 shadow-[0_0_8px_#10b981]"></span>
+        </span>
+        <span class="font-mono text-xs sm:text-sm font-semibold tracking-wide text-emerald-300/90">
+          Student Developer <span class="text-lime-400/80">//</span> Open for Internships
+        </span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.12] mb-6">
+        Hey, I am 
+        <span class="relative inline-block whitespace-nowrap">
+          <span class="bg-gradient-to-r from-emerald-400 via-emerald-300 to-lime-400 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(16,185,129,0.4)]">
+            Harshitha G
+          </span>
+          <span class="absolute -bottom-1.5 left-0 right-0 h-[3px] bg-gradient-to-r from-emerald-400/0 via-emerald-400 to-lime-400/0 rounded-full opacity-70"></span>
+        </span> 
+        <span class="block mt-2 text-3xl sm:text-5xl md:text-6xl text-zinc-100 font-bold">
+          — Building the Future of Tech.
+        </span>
+      </h1>
+
+      <!-- Student Bio -->
+      <div class="max-w-2xl mx-auto mb-10">
+        <p class="text-lg sm:text-xl text-zinc-300/95 font-normal leading-relaxed">
+          <span class="inline-flex items-center px-2 py-0.5 rounded-md bg-[#161b22] border border-emerald-500/25 text-emerald-300 font-medium font-mono text-base mr-1.5 shadow-sm">
+            BE in AIML
+          </span>
+          at 
+          <span class="text-white font-semibold underline decoration-emerald-500/50 decoration-2 underline-offset-4">
+            K S Institute of Technology
+          </span> 
+          passionate about <span class="text-emerald-300 font-medium">web development</span>, 
+          <span class="text-lime-300 font-medium">AI</span>, and building real-world projects.
+        </p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 w-full sm:w-auto mb-14">
+        <!-- Primary Action: Glowing Emerald Button -->
+        <a href="#projects" class="w-full sm:w-auto group relative inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl text-base font-bold font-mono text-[#0d1117] bg-gradient-to-r from-emerald-400 via-emerald-500 to-lime-400 hover:from-emerald-300 hover:to-lime-300 transition-all duration-300 shadow-[0_0_25px_rgba(16,185,129,0.45)] hover:shadow-[0_12px_32px_-4px_rgba(16,185,129,0.7)] hover:-translate-y-1 active:translate-y-0">
+          <span>View My Projects</span>
+          <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+
+        <!-- Secondary Action: Outline Secondary Button -->
+        <a href="#resume" class="w-full sm:w-auto group inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl text-base font-semibold font-mono text-emerald-400 hover:text-white bg-[#161b22]/70 hover:bg-[#161b22] border border-emerald-500/35 hover:border-emerald-400 transition-all duration-300 shadow-sm hover:shadow-[0_0_20px_rgba(16,185,129,0.25)] hover:-translate-y-0.5 active:translate-y-0">
+          <svg class="w-4 h-4 text-emerald-400 group-hover:text-lime-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+          <span>Download Resume / CV</span>
+        </a>
+      </div>
+
+      <!-- Quick Tech Pills Ticker -->
+      <div class="w-full max-w-3xl pt-8 border-t border-emerald-500/15">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex flex-wrap items-center justify-center gap-2">
+            <span class="text-xs font-mono text-zinc-500 uppercase tracking-wider mr-1">Stack //</span>
+            <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#161b22]/80 border border-emerald-500/20 text-xs font-mono text-zinc-300">
+              <span>⚡</span><span>AIML</span>
+            </div>
+            <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#161b22]/80 border border-emerald-500/20 text-xs font-mono text-zinc-300">
+              <span>🐍</span><span>Python</span>
+            </div>
+            <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#161b22]/80 border border-emerald-500/20 text-xs font-mono text-zinc-300">
+              <span>⚛️</span><span>React</span>
+            </div>
+            <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#161b22]/80 border border-emerald-500/20 text-xs font-mono text-zinc-300">
+              <span>🎨</span><span>Tailwind</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 text-xs font-mono text-emerald-400/80 bg-[#161b22]/50 px-3 py-1.5 rounded-lg border border-emerald-500/15">
+            <span class="w-1.5 h-1.5 rounded-full bg-lime-400"></span>
+            <span>Bengaluru, IN</span>
+            <span class="text-zinc-600">|</span>
+            <span class="text-zinc-400">KSIT '26</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Scroll Down Pill Indicator -->
+    <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-zinc-500 hover:text-emerald-400 transition-colors">
+      <span class="text-[10px] font-mono tracking-widest uppercase">Scroll</span>
+      <div class="w-5 h-8 rounded-full border border-emerald-500/30 flex items-start justify-center p-1">
+        <div class="w-1 h-2 bg-emerald-400 rounded-full animate-bounce"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 3. FEATURED PROJECTS SHOWCASE                                 -->
+  <!-- ============================================================ -->
+  <section id="projects" class="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-10 border-t border-emerald-500/15">
+    <div class="flex flex-col items-center text-center mb-14">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#161b22] border border-emerald-500/25 text-emerald-400 font-mono text-xs mb-3 shadow-sm">
+        <span class="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse"></span>
+        <span>STUDENT SHOWCASE</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+        Featured <span class="bg-gradient-to-r from-emerald-400 via-emerald-300 to-lime-400 bg-clip-text text-transparent">Projects</span>
+      </h2>
+      <p class="text-zinc-400 max-w-2xl text-base sm:text-lg">
+        Production-ready web applications, computer vision models, and student collaboration hubs designed with clean architecture and responsive UI.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-2 mt-8 p-1.5 bg-[#161b22]/90 rounded-2xl border border-emerald-500/20 backdrop-blur-md shadow-lg">
+        <button class="filter-pill active px-4 py-2 rounded-xl text-xs sm:text-sm font-mono font-medium transition-all duration-200 cursor-pointer bg-gradient-to-r from-emerald-500/25 to-lime-500/25 text-emerald-300 border border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.3)]" data-filter="all">All</button>
+        <button class="filter-pill px-4 py-2 rounded-xl text-xs sm:text-sm font-mono font-medium text-zinc-400 hover:text-white hover:bg-[#21262d]/50 border border-transparent transition-all duration-200 cursor-pointer" data-filter="web-apps">Web Apps</button>
+        <button class="filter-pill px-4 py-2 rounded-xl text-xs sm:text-sm font-mono font-medium text-zinc-400 hover:text-white hover:bg-[#21262d]/50 border border-transparent transition-all duration-200 cursor-pointer" data-filter="ai-ml">AI / ML</button>
+        <button class="filter-pill px-4 py-2 rounded-xl text-xs sm:text-sm font-mono font-medium text-zinc-400 hover:text-white hover:bg-[#21262d]/50 border border-transparent transition-all duration-200 cursor-pointer" data-filter="mini-projects">Mini-Projects</button>
+      </div>
+    </div>
+
+    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <!-- Project 1 -->
+      <div class="project-card-wrapper" data-category="web-apps">
+        <div class="tilt-card relative h-full rounded-2xl bg-[#161b22]/80 backdrop-blur-md border border-emerald-500/20 p-6 flex flex-col justify-between overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.5)]">
+          <div class="glare-overlay absolute inset-0 opacity-0"></div>
+          <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent"></div>
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="font-mono text-xs font-semibold tracking-wider text-emerald-400/90 bg-[#0d1117]/80 px-2.5 py-1 rounded-md border border-emerald-500/25">WEB APPS</span>
+              <span class="font-mono text-[11px] font-medium px-2 py-0.5 rounded-full border border-emerald-500/30 text-emerald-400 bg-emerald-950/70">LIVE // v1.4</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-3">Campus Event Finder</h3>
+            <p class="text-zinc-300/90 text-sm leading-relaxed mb-6">
+              Consolidates university hackathons, club workshops, and technical symposiums into a centralized live schedule so students never miss key deadlines. Features real-time seat reservation, automated calendar sync, and interactive venue maps across campus.
+            </p>
+          </div>
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-mono font-medium text-emerald-300/90 bg-[#0d1117]/70 border border-emerald-500/15">React</span>
+              <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-mono font-medium text-emerald-300/90 bg-[#0d1117]/70 border border-emerald-500/15">Firebase</span>
+              <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-mono font-medium text-emerald-300/90 bg-[#0d1117]/70 border border-emerald-500/15">Tailwind CSS</span>
+              <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-mono font-medium text-emerald-300/90 bg-[#0d1117]/70 border border-emerald-500/15">Leaflet</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3 pt-4 border-t border-emerald-500/15">
+              <a href="#" class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-mono font-bold text-[#0d1117] bg-gradient-to-r from-emerald-400 to-lime-400 hover:from-emerald-300 hover:to-lime-300 shadow-[0_0_12px_rgba(16,185,129,0.3)] transition-all transform hover:-translate-y-0.5">
+                <span>Live Demo</span>
+              </a>
+              <a href="#" class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-mono font-semibold text-emerald-300 hover:text-white bg-[#0d1117]/80 hover:bg-[#161b22] border border-emerald-500/30 transition-all transform hover:-translate-y-0.5">
+                <span>GitHub Code</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card-wrapper" data-category="ai-ml">
+        <div class="tilt-card relative h-full rounded-2xl bg-[#161b22]/80 backdrop-blur-md border border-emerald-500/20 p-6 flex flex-col justify-between overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.5)]">
+          <div class="glare-overlay absolute inset-0 opacity-0"></div>
+          <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-lime-500/40 to-transparent"></div>
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="font-mono text-xs font-semibold tracking-wider text-lime-400/90 bg-[#0d1117]/80 px-2.5 py-1 rounded-md border border-lime-500/25">AI / ML</span>
+              <span class="font-mono text-[11px] font-medium px-2 py-0.5 rounded-full border border-lime-500/30 text-lime-400 bg-lime-950/70">ACCURACY // 99.2%</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-3">Smart Attendance Tracker</h3>
+            <p class="text-zinc-300/90 text-sm leading-relaxed mb-6">
+              Replaces slow manual roll-calls with a deep learning computer vision pipeline that recognizes and logs full classrooms in under two seconds. Incorporates anti-spoofing liveness checks, automated daily reports, and instant absent student alert dispatch.
+            </p>
+          </div>
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-mono font-medium text-emerald-300/90 bg-[#0d1117]/70 border border-emerald-500/15">Python</span>
+              <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-mono font-medium text-emerald-300/90 bg-[#0d1117]/70 border border-emerald-500/15">OpenCV</span>
+              <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-mono font-medium text-emerald-300/90 bg-[#0d1117]/70 border border-emerald-500/15">FastAPI</span>
+              <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-mono font-medium text-emerald-300/90 bg-[#0d1117]/70 border border-emerald-500/15">CNNs</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3 pt-4 border-t border-emerald-500/15">
+              <a href="#" class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-mono font-bold text-[#0d1117] bg-gradient-to-r from-emerald-400 to-lime-400 hover:from-emerald-300 hover:to-lime-300 shadow-[0_0_12px_rgba(16,185,129,0.3)] transition-all transform hover:-translate-y-0.5">
+                <span>Live Demo</span>
+              </a>
+              <a href="#" class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-mono font-semibold text-emerald-300 hover:text-white bg-[#0d1117]/80 hover:bg-[#161b22] border border-emerald-500/30 transition-all transform hover:-translate-y-0.5">
+                <span>GitHub Code</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card-wrapper" data-category="web-apps mini-projects">
+        <div class="tilt-card relative h-full rounded-2xl bg-[#161b22]/80 backdrop-blur-md border border-emerald-500/20 p-6 flex flex-col justify-between overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.5)]">
+          <div class="glare-overlay absolute inset-0 opacity-0"></div>
+          <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent"></div>
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="font-mono text-xs font-semibold tracking-wider text-emerald-300/90 bg-[#0d1117]/80 px-2.5 py-1 rounded-md border border-emerald-500/25">MINI-PROJECTS</span>
+              <span class="font-mono text-[11px] font-medium px-2 py-0.5 rounded-full border border-emerald-500/30 text-emerald-300 bg-emerald-950/70">1.2K+ DOWNLOADS</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-3">Student Notes Marketplace</h3>
+            <p class="text-zinc-300/90 text-sm leading-relaxed mb-6">
+              A peer-to-peer engineering repository where VTU students upload, peer-review, and download verified semester lecture notes and question banks. Built with subject-wise categorization, full-text document search, and a reputation badge system for top student uploaders.
+            </p>
+          </div>
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-mono font-medium text-emerald-300/90 bg-[#0d1117]/70 border border-emerald-500/15">Tailwind</span>
+              <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-mono font-medium text-emerald-300/90 bg-[#0d1117]/70 border border-emerald-500/15">Node.js</span>
+              <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-mono font-medium text-emerald-300/90 bg-[#0d1117]/70 border border-emerald-500/15">Express</span>
+              <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-mono font-medium text-emerald-300/90 bg-[#0d1117]/70 border border-emerald-500/15">MongoDB</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3 pt-4 border-t border-emerald-500/15">
+              <a href="#" class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-mono font-bold text-[#0d1117] bg-gradient-to-r from-emerald-400 to-lime-400 hover:from-emerald-300 hover:to-lime-300 shadow-[0_0_12px_rgba(16,185,129,0.3)] transition-all transform hover:-translate-y-0.5">
+                <span>Live Demo</span>
+              </a>
+              <a href="#" class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-mono font-semibold text-emerald-300 hover:text-white bg-[#0d1117]/80 hover:bg-[#161b22] border border-emerald-500/30 transition-all transform hover:-translate-y-0.5">
+                <span>GitHub Code</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 4. TECH STACK & SKILLS                                        -->
+  <!-- ============================================================ -->
+  <section id="skills" class="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-10 border-t border-emerald-500/15">
+    <div class="flex flex-col items-center text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#161b22] border border-emerald-500/25 text-emerald-400 font-mono text-xs mb-3 shadow-sm">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>TECHNICAL ARSENAL</span>
+      </div>
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+        Tech Stack & <span class="bg-gradient-to-r from-emerald-400 via-emerald-300 to-lime-400 bg-clip-text text-transparent">Skills</span>
+      </h2>
+      <p class="text-zinc-400 max-w-2xl text-base sm:text-lg">
+        Core languages, modern development frameworks, and academic computing foundations honed through engineering coursework.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-6 pt-4 text-xs font-mono text-zinc-400">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]"></span>
+          <span class="text-zinc-300">Proficient</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-lime-400 shadow-[0_0_8px_#a3e635]"></span>
+          <span class="text-zinc-300">Familiar</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#38bdf8]"></span>
+          <span class="text-zinc-300">Currently Learning</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3-Column Categorized Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Languages -->
+      <div class="group relative rounded-2xl bg-[#161b22]/75 backdrop-blur-md border border-emerald-500/20 p-6 sm:p-7 flex flex-col justify-between shadow-[0_8px_24px_rgba(0,0,0,0.5)] hover:border-emerald-500/40 transition-all duration-300">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-mono text-xs font-semibold tracking-wider text-emerald-400/90 bg-[#0d1117] px-2.5 py-1 rounded-md border border-emerald-500/25">SYNTAX & CORE</span>
+            <span class="font-mono text-xs text-zinc-500">6 skills</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2 group-hover:text-emerald-300 transition-colors">Languages</h3>
+          <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-6">Foundational programming languages used for systems engineering and scripting.</p>
+
+          <div class="flex flex-wrap gap-2.5 pt-2">
+            <!-- Python -->
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">Python</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-emerald-500/40 text-[10px] font-mono text-emerald-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span>Proficient</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-emerald-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+
+            <!-- C++ -->
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">C++</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-emerald-500/40 text-[10px] font-mono text-emerald-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span>Proficient</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-emerald-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+
+            <!-- JavaScript -->
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">JavaScript</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-emerald-500/40 text-[10px] font-mono text-emerald-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span>Proficient</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-emerald-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+
+            <!-- Java -->
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">Java</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-lime-500/40 text-[10px] font-mono text-lime-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-lime-400"></span>
+                  <span>Familiar</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-lime-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+
+            <!-- SQL -->
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">SQL</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-emerald-500/40 text-[10px] font-mono text-emerald-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span>Proficient</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-emerald-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+
+            <!-- TypeScript -->
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">TypeScript</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-cyan-500/40 text-[10px] font-mono text-cyan-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                  <span>Currently Learning</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-cyan-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frameworks & Tools -->
+      <div class="group relative rounded-2xl bg-[#161b22]/75 backdrop-blur-md border border-emerald-500/20 p-6 sm:p-7 flex flex-col justify-between shadow-[0_8px_24px_rgba(0,0,0,0.5)] hover:border-emerald-500/40 transition-all duration-300">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-mono text-xs font-semibold tracking-wider text-emerald-400/90 bg-[#0d1117] px-2.5 py-1 rounded-md border border-emerald-500/25">DEVELOPMENT & STACK</span>
+            <span class="font-mono text-xs text-zinc-500">7 tools</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2 group-hover:text-emerald-300 transition-colors">Frameworks & Tools</h3>
+          <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-6">Modern frontend libraries, build systems, and developer tooling for scalable web projects.</p>
+
+          <div class="flex flex-wrap gap-2.5 pt-2">
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">React</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-emerald-500/40 text-[10px] font-mono text-emerald-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span>Proficient</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-emerald-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">Tailwind CSS</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-emerald-500/40 text-[10px] font-mono text-emerald-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span>Proficient</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-emerald-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">Node.js</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-lime-500/40 text-[10px] font-mono text-lime-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-lime-400"></span>
+                  <span>Familiar</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-lime-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">Git / GitHub</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-emerald-500/40 text-[10px] font-mono text-emerald-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span>Proficient</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-emerald-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">Next.js</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-lime-500/40 text-[10px] font-mono text-lime-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-lime-400"></span>
+                  <span>Familiar</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-lime-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">FastAPI</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-lime-500/40 text-[10px] font-mono text-lime-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-lime-400"></span>
+                  <span>Familiar</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-lime-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">OpenCV</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-cyan-500/40 text-[10px] font-mono text-cyan-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                  <span>Currently Learning</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-cyan-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core CS Concepts -->
+      <div class="group relative rounded-2xl bg-[#161b22]/75 backdrop-blur-md border border-emerald-500/20 p-6 sm:p-7 flex flex-col justify-between shadow-[0_8px_24px_rgba(0,0,0,0.5)] hover:border-emerald-500/40 transition-all duration-300">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-mono text-xs font-semibold tracking-wider text-emerald-400/90 bg-[#0d1117] px-2.5 py-1 rounded-md border border-emerald-500/25">THEORY & ARCHITECTURE</span>
+            <span class="font-mono text-xs text-zinc-500">6 concepts</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2 group-hover:text-emerald-300 transition-colors">Core CS Concepts</h3>
+          <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-6">Fundamental computer science pillars powering software optimization and system design.</p>
+
+          <div class="flex flex-wrap gap-2.5 pt-2">
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">Data Structures</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-emerald-500/40 text-[10px] font-mono text-emerald-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span>Proficient</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-emerald-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">OOP</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-emerald-500/40 text-[10px] font-mono text-emerald-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span>Proficient</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-emerald-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">DBMS</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-emerald-500/40 text-[10px] font-mono text-emerald-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span>Proficient</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-emerald-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">OS</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-lime-500/40 text-[10px] font-mono text-lime-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-lime-400"></span>
+                  <span>Familiar</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-lime-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">Networks</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-lime-500/40 text-[10px] font-mono text-lime-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-lime-400"></span>
+                  <span>Familiar</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-lime-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+
+            <div class="group/badge relative inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0d1117]/80 border border-emerald-500/20 text-zinc-200 hover:text-white hover:border-emerald-400 hover:bg-[#161b22] hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="font-mono text-xs font-medium">ML Foundations</span>
+              <div class="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/badge:opacity-100 pointer-events-none transition-all duration-200 transform translate-y-1 group-hover/badge:translate-y-0 z-30 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0d1117] border border-cyan-500/40 text-[10px] font-mono text-cyan-300 shadow-lg">
+                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                  <span>Currently Learning</span>
+                </div>
+                <div class="w-2 h-2 bg-[#0d1117] border-r border-b border-cyan-500/40 transform rotate-45 mx-auto -mt-1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 5. EDUCATION & CAMPUS JOURNEY (Timeline & Achievements)      -->
+  <!-- ============================================================ -->
+  <section id="campus-life" class="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-10 border-t border-emerald-500/15">
+    
+    <!-- Section Header -->
+    <div class="flex flex-col items-center text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#161b22] border border-emerald-500/25 text-emerald-400 font-mono text-xs mb-3 shadow-sm">
+        <span class="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse"></span>
+        <span>ACADEMIC & CAMPUS ROOTS</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+        Education & <span class="bg-gradient-to-r from-emerald-400 via-emerald-300 to-lime-400 bg-clip-text text-transparent">Campus Journey</span>
+      </h2>
+      <p class="text-zinc-400 max-w-2xl text-base sm:text-lg">
+        Milestones from early programming foundations to active engineering student life, hackathons, and technical community building at KSIT.
+      </p>
+    </div>
+
+    <!-- Main Grid: Left Vertical Timeline + Right 2x2 Badges -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+
+      <!-- LEFT: Vertical Illuminated Timeline (7 cols) -->
+      <div class="lg:col-span-7">
+        <div class="flex items-center justify-between mb-8 pb-3 border-b border-emerald-500/15">
+          <span class="font-mono text-xs font-semibold tracking-wider text-emerald-400 uppercase">
+            // Student Timeline
+          </span>
+          <span class="font-mono text-xs text-zinc-500">2024 → Present</span>
+        </div>
+
+        <div class="relative pl-2 sm:pl-3">
+          <!-- Illuminated Emerald Line -->
+          <div class="absolute left-[23px] sm:left-[27px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-emerald-400 via-emerald-500/70 to-lime-400/50 shadow-[0_0_12px_rgba(16,185,129,0.5)]"></div>
+
+          <div class="space-y-8">
+
+            <!-- 2026 Milestone (Current) -->
+            <div class="relative flex items-start group">
+              <div class="relative z-10 flex-shrink-0 flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#0d1117] border border-emerald-500/50 group-hover:border-emerald-400 shadow-[0_0_18px_rgba(16,185,129,0.4)] transition-all duration-300">
+                <span class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-400 shadow-[0_0_8px_#10b981]"></span>
+                </span>
+              </div>
+
+              <div class="ml-5 sm:ml-6 flex-1 p-5 sm:p-6 rounded-2xl bg-[#161b22]/75 backdrop-blur-md border border-emerald-500/20 group-hover:border-emerald-500/40 group-hover:shadow-[0_8px_30px_rgba(16,185,129,0.18)] transition-all duration-300">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                  <div class="flex items-center gap-2">
+                    <span class="font-mono text-xs font-bold text-[#0d1117] bg-gradient-to-r from-emerald-400 to-lime-400 px-2.5 py-0.5 rounded-md shadow-sm">
+                      2026
+                    </span>
+                    <span class="font-mono text-[10px] text-emerald-400 tracking-wider">
+                      CURRENT MILESTONE
+                    </span>
+                  </div>
+                  <span class="font-mono text-[11px] text-zinc-500 bg-[#0d1117] px-2 py-0.5 rounded border border-emerald-500/15">
+                    B.E. UNDERGRADUATE
+                  </span>
+                </div>
+
+                <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight mb-2 group-hover:text-emerald-300 transition-colors">
+                  2nd Year BE in AIML @ K S Institute of Technology
+                </h3>
+                <p class="text-zinc-300/90 text-xs sm:text-sm leading-relaxed">
+                  Deepening specialization in artificial intelligence, neural networks, and scalable full-stack web engineering while seeking summer internship roles.
+                </p>
+              </div>
+            </div>
+
+            <!-- 2025 Milestone -->
+            <div class="relative flex items-start group">
+              <div class="relative z-10 flex-shrink-0 flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#0d1117] border border-emerald-500/30 group-hover:border-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.25)] transition-all duration-300">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80 group-hover:bg-lime-400 transition-colors"></span>
+              </div>
+
+              <div class="ml-5 sm:ml-6 flex-1 p-5 sm:p-6 rounded-2xl bg-[#161b22]/75 backdrop-blur-md border border-emerald-500/20 group-hover:border-emerald-500/40 group-hover:shadow-[0_8px_30px_rgba(16,185,129,0.18)] transition-all duration-300">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                  <div class="flex items-center gap-2">
+                    <span class="font-mono text-xs font-bold text-zinc-300 bg-[#0d1117] px-2.5 py-0.5 rounded-md border border-emerald-500/20">
+                      2025
+                    </span>
+                    <span class="font-mono text-[10px] text-emerald-400 tracking-wider">
+                      CAMPUS INVOLVEMENT
+                    </span>
+                  </div>
+                  <span class="font-mono text-[11px] text-zinc-500 bg-[#0d1117] px-2 py-0.5 rounded border border-emerald-500/15">
+                    CLUB MEMBER & DEV
+                  </span>
+                </div>
+
+                <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight mb-2 group-hover:text-emerald-300 transition-colors">
+                  Began Degree & Joined Core Technical Clubs
+                </h3>
+                <p class="text-zinc-300/90 text-xs sm:text-sm leading-relaxed">
+                  Transitioned to university engineering, joined departmental tech clubs, and collaborated on real-world team projects and hackathon prototypes.
+                </p>
+              </div>
+            </div>
+
+            <!-- 2024 Milestone -->
+            <div class="relative flex items-start group">
+              <div class="relative z-10 flex-shrink-0 flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#0d1117] border border-emerald-500/30 group-hover:border-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.25)] transition-all duration-300">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80 group-hover:bg-lime-400 transition-colors"></span>
+              </div>
+
+              <div class="ml-5 sm:ml-6 flex-1 p-5 sm:p-6 rounded-2xl bg-[#161b22]/75 backdrop-blur-md border border-emerald-500/20 group-hover:border-emerald-500/40 group-hover:shadow-[0_8px_30px_rgba(16,185,129,0.18)] transition-all duration-300">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                  <div class="flex items-center gap-2">
+                    <span class="font-mono text-xs font-bold text-zinc-300 bg-[#0d1117] px-2.5 py-0.5 rounded-md border border-emerald-500/20">
+                      2024
+                    </span>
+                    <span class="font-mono text-[10px] text-emerald-400 tracking-wider">
+                      STARTING MILESTONE
+                    </span>
+                  </div>
+                  <span class="font-mono text-[11px] text-zinc-500 bg-[#0d1117] px-2 py-0.5 rounded border border-emerald-500/15">
+                    FOUNDATION & PU
+                  </span>
+                </div>
+
+                <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight mb-2 group-hover:text-emerald-300 transition-colors">
+                  Completed Pre-University (PU) & Learnt First Languages
+                </h3>
+                <p class="text-zinc-300/90 text-xs sm:text-sm leading-relaxed">
+                  Graduated Pre-University with top academic standing, wrote first programs in C++ and Python, and developed a strong passion for software.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Achievement Badges 2x2 Grid (5 cols) -->
+      <div class="lg:col-span-5">
+        <div class="flex items-center justify-between mb-8 pb-3 border-b border-emerald-500/15">
+          <span class="font-mono text-xs font-semibold tracking-wider text-lime-400 uppercase">
+            // Key Achievements
+          </span>
+          <span class="font-mono text-xs text-zinc-500">Verified Highlights</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          <!-- Badge 1: Hackathon -->
+          <div class="group relative p-5 rounded-2xl bg-[#161b22]/80 backdrop-blur-md border border-emerald-500/20 hover:border-emerald-400/50 hover:shadow-[0_12px_28px_-6px_rgba(16,185,129,0.28)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+            <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent group-hover:via-emerald-400 transition-all duration-300"></div>
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-2xl">🏆</span>
+                <span class="font-mono text-[10px] text-emerald-400/80 bg-[#0d1117] px-2 py-0.5 rounded border border-emerald-500/20">
+                  HACKATHON
+                </span>
+              </div>
+              <h4 class="text-base sm:text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">
+                1st Place
+              </h4>
+              <div class="text-xs font-mono text-emerald-400/90 mb-2">
+                University Hackathon
+              </div>
+              <p class="text-zinc-400 text-xs leading-relaxed">
+                Awarded top honors for an innovative campus tech utility prototype.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-emerald-500/10 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+              <span>verified</span>
+              <span class="text-emerald-400 group-hover:translate-x-0.5 transition-transform">✓</span>
+            </div>
+          </div>
+
+          <!-- Badge 2: LeetCode -->
+          <div class="group relative p-5 rounded-2xl bg-[#161b22]/80 backdrop-blur-md border border-emerald-500/20 hover:border-emerald-400/50 hover:shadow-[0_12px_28px_-6px_rgba(16,185,129,0.28)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+            <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent group-hover:via-emerald-400 transition-all duration-300"></div>
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-2xl">⚡</span>
+                <span class="font-mono text-[10px] text-emerald-400/80 bg-[#0d1117] px-2 py-0.5 rounded border border-emerald-500/20">
+                  DSA / CODING
+                </span>
+              </div>
+              <h4 class="text-base sm:text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">
+                150+ Solved
+              </h4>
+              <div class="text-xs font-mono text-emerald-400/90 mb-2">
+                LeetCode Problems
+              </div>
+              <p class="text-zinc-400 text-xs leading-relaxed">
+                Consistent problem solver focused on Data Structures & Algorithms.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-emerald-500/10 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+              <span>verified</span>
+              <span class="text-emerald-400 group-hover:translate-x-0.5 transition-transform">✓</span>
+            </div>
+          </div>
+
+          <!-- Badge 3: Tech Club Organizer -->
+          <div class="group relative p-5 rounded-2xl bg-[#161b22]/80 backdrop-blur-md border border-emerald-500/20 hover:border-emerald-400/50 hover:shadow-[0_12px_28px_-6px_rgba(16,185,129,0.28)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+            <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent group-hover:via-emerald-400 transition-all duration-300"></div>
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-2xl">👥</span>
+                <span class="font-mono text-[10px] text-emerald-400/80 bg-[#0d1117] px-2 py-0.5 rounded border border-emerald-500/20">
+                  LEADERSHIP
+                </span>
+              </div>
+              <h4 class="text-base sm:text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">
+                Tech Club
+              </h4>
+              <div class="text-xs font-mono text-emerald-400/90 mb-2">
+                Active Organizer
+              </div>
+              <p class="text-zinc-400 text-xs leading-relaxed">
+                Helped coordinate departmental coding bootcamps and tech events.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-emerald-500/10 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+              <span>verified</span>
+              <span class="text-emerald-400 group-hover:translate-x-0.5 transition-transform">✓</span>
+            </div>
+          </div>
+
+          <!-- Badge 4: Full-Stack Certified -->
+          <div class="group relative p-5 rounded-2xl bg-[#161b22]/80 backdrop-blur-md border border-emerald-500/20 hover:border-emerald-400/50 hover:shadow-[0_12px_28px_-6px_rgba(16,185,129,0.28)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+            <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent group-hover:via-emerald-400 transition-all duration-300"></div>
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-2xl">📜</span>
+                <span class="font-mono text-[10px] text-emerald-400/80 bg-[#0d1117] px-2 py-0.5 rounded border border-emerald-500/20">
+                  CREDENTIAL
+                </span>
+              </div>
+              <h4 class="text-base sm:text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">
+                Full-Stack
+              </h4>
+              <div class="text-xs font-mono text-emerald-400/90 mb-2">
+                Certified Developer
+              </div>
+              <p class="text-zinc-400 text-xs leading-relaxed">
+                Completed comprehensive modern web development & API coursework.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-emerald-500/10 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+              <span>verified</span>
+              <span class="text-emerald-400 group-hover:translate-x-0.5 transition-transform">✓</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Institutional Callout Card -->
+        <div class="mt-6 p-4 rounded-xl bg-[#161b22]/50 border border-emerald-500/15 flex items-center gap-3">
+          <span class="flex-shrink-0 text-xl">🏛️</span>
+          <div class="text-xs text-zinc-300">
+            <span class="text-white font-semibold block">K S Institute of Technology</span>
+            Affiliated with VTU • Department of AIML • Bengaluru, India
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- 6. ABOUT SECTION                           -->
+  <!-- ========================================== -->
+  <section id="about" class="py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-t border-emerald-500/10">
+    <div class="flex items-center gap-3 mb-6">
+      <span class="font-mono text-emerald-400 text-sm">01.</span>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">About Me</h2>
+      <div class="flex-1 h-[1px] bg-emerald-500/20 ml-2"></div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="md:col-span-2 p-6 rounded-2xl bg-[#161b22]/70 border border-emerald-500/15">
+        <p class="text-zinc-300 leading-relaxed mb-4">
+          Currently pursuing a Bachelor of Engineering (BE) in Artificial Intelligence & Machine Learning at <strong class="text-emerald-400 font-semibold">K S Institute of Technology</strong>, Bengaluru. My focus lies at the intersection of modern full-stack web engineering and intelligent systems.
+        </p>
+        <p class="text-zinc-400 leading-relaxed text-sm">
+          Passionate about building responsive, accessible web applications and integrating real-world AI pipelines that deliver exceptional user experiences.
+        </p>
+      </div>
+      <div class="p-6 rounded-2xl bg-[#161b22]/70 border border-emerald-500/15 flex flex-col justify-center">
+        <span class="font-mono text-xs text-emerald-400 mb-1">UNDERGRADUATE</span>
+        <span class="text-lg font-bold text-white mb-1">BE in AIML</span>
+        <span class="font-mono text-xs text-zinc-400">KSIT Bengaluru • 2022-2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- 7. CONTACT SECTION                         -->
+  <!-- ========================================== -->
+  <section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-t border-emerald-500/10 text-center">
+    <span class="font-mono text-xs text-emerald-400 uppercase tracking-widest block mb-3">02. Connect</span>
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Get In Touch</h2>
+    <p class="text-zinc-400 max-w-lg mx-auto mb-8 text-base">
+      Open for student developer internships and technical collaborations. Let's build something remarkable together!
+    </p>
+    <a href="mailto:harshitha.g@example.com" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base font-bold font-mono text-[#0d1117] bg-gradient-to-r from-emerald-400 to-lime-400 hover:from-emerald-300 hover:to-lime-300 transition-all shadow-[0_0_25px_rgba(16,185,129,0.4)]">
+      Say Hello // harshitha.g@example.com
+    </a>
+  </section>
+
+  <footer class="py-8 px-4 text-center border-t border-emerald-500/15 bg-[#090d13]">
+    <p class="text-xs font-mono text-zinc-500">
+      Designed & Built by <span class="text-emerald-400">Harshitha G</span> • Crafted with Cyber-Emerald Theme
+    </p>
+  </footer>
+
+  <!-- ============================================================ -->
+  <!-- 8. JAVASCRIPT: 3D CARD TILT, FILTERS, CANVAS & NAVBAR         -->
+  <!-- ============================================================ -->
+  <script>
+    const navContainer = document.getElementById('nav-container');
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 25) {
+        navContainer.classList.add('bg-[#0d1117]/90', 'border-emerald-500/30', 'shadow-[0_10px_35px_rgba(0,0,0,0.8)]');
+        navContainer.classList.remove('bg-[#0d1117]/75');
+      } else {
+        navContainer.classList.remove('bg-[#0d1117]/90', 'border-emerald-500/30', 'shadow-[0_10px_35px_rgba(0,0,0,0.8)]');
+        navContainer.classList.add('bg-[#0d1117]/75');
+      }
+    });
+
+    mobileBtn.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.contains('hidden');
+      if (isHidden) {
+        mobileMenu.classList.remove('hidden');
+        mobileMenu.classList.add('flex');
+        hamburgerIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+      } else {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+        hamburgerIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      }
+    });
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+        hamburgerIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      });
+    });
+
+    // 3D Perspective Tilt & Shine Physics
+    const tiltCards = document.querySelectorAll('.tilt-card');
+    tiltCards.forEach(card => {
+      const glare = card.querySelector('.glare-overlay');
+      card.addEventListener('mousemove', (e) => {
+        card.classList.add('is-tilting');
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -7;
+        const rotateY = ((x - centerX) / centerX) * 7;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-6px)`;
+        card.style.borderColor = 'rgba(52, 211, 153, 0.45)';
+        card.style.boxShadow = '0 12px 35px -5px rgba(16, 185, 129, 0.32), 0 0 20px rgba(16, 185, 129, 0.15)';
+        if (glare) {
+          glare.style.opacity = '1';
+          glare.style.background = `radial-gradient(circle 280px at ${x}px ${y}px, rgba(16, 185, 129, 0.18), transparent 75%)`;
+        }
+      });
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('is-tilting');
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+        card.style.borderColor = 'rgba(16, 185, 129, 0.2)';
+        card.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.5)';
+        if (glare) glare.style.opacity = '0';
+      });
+    });
+
+    // Filter Pills Interaction
+    const filterPills = document.querySelectorAll('.filter-pill');
+    const projectWrappers = document.querySelectorAll('.project-card-wrapper');
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        filterPills.forEach(p => {
+          p.classList.remove('bg-gradient-to-r', 'from-emerald-500/25', 'to-lime-500/25', 'text-emerald-300', 'border-emerald-400/50', 'shadow-[0_0_15px_rgba(16,185,129,0.3)]');
+          p.classList.add('text-zinc-400', 'border-transparent');
+        });
+        pill.classList.remove('text-zinc-400', 'border-transparent');
+        pill.classList.add('bg-gradient-to-r', 'from-emerald-500/25', 'to-lime-500/25', 'text-emerald-300', 'border-emerald-400/50', 'shadow-[0_0_15px_rgba(16,185,129,0.3)]');
+        const filter = pill.getAttribute('data-filter');
+        projectWrappers.forEach(wrapper => {
+          const category = wrapper.getAttribute('data-category') || '';
+          if (filter === 'all' || category.includes(filter)) {
+            wrapper.style.display = 'block';
+            wrapper.style.opacity = '0';
+            wrapper.style.transform = 'scale(0.96)';
+            setTimeout(() => {
+              wrapper.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+              wrapper.style.opacity = '1';
+              wrapper.style.transform = 'scale(1)';
+            }, 30);
+          } else {
+            wrapper.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Matrix-Dot Grid on HTML5 Canvas
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = 0, height = 0, dots = [];
+    const spacing = 32;
+    const mouse = { x: -9999, y: -9999, targetX: -9999, targetY: -9999, radius: 140 };
+
+    class Dot {
+      constructor(x, y) {
+        this.baseX = x; this.baseY = y; this.x = x; this.y = y;
+        this.vx = 0; this.vy = 0; this.size = 1.25; this.baseAlpha = 0.16; this.alpha = 0.16; this.color = '#10b981';
+      }
+      update(mouseX, mouseY, time) {
+        const ambientWave = Math.sin(time * 0.0022 + this.baseX * 0.008 + this.baseY * 0.008) * 2;
+        const targetBaseX = this.baseX;
+        const targetBaseY = this.baseY + ambientWave;
+        const dx = mouseX - this.x;
+        const dy = mouseY - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const maxDist = mouse.radius;
+        if (dist < maxDist && dist > 0) {
+          const force = (1 - dist / maxDist);
+          const pushAngle = Math.atan2(dy, dx);
+          const pushDist = force * 24;
+          const targetX = targetBaseX - Math.cos(pushAngle) * pushDist;
+          const targetY = targetBaseY - Math.sin(pushAngle) * pushDist;
+          this.vx += (targetX - this.x) * 0.08;
+          this.vy += (targetY - this.y) * 0.08;
+          this.alpha = Math.min(0.95, this.baseAlpha + force * 0.8);
+          this.size = 1.25 + force * 1.8;
+          this.color = force > 0.6 ? '#a3e635' : '#10b981';
+        } else {
+          this.vx += (targetBaseX - this.x) * 0.04;
+          this.vy += (targetBaseY - this.y) * 0.04;
+          this.alpha += (this.baseAlpha - this.alpha) * 0.05;
+          this.size += (1.25 - this.size) * 0.05;
+          this.color = '#10b981';
+        }
+        this.vx *= 0.82; this.vy *= 0.82; this.x += this.vx; this.y += this.vy;
+      }
+      draw(context) {
+        context.beginPath();
+        context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        if (this.alpha > 0.25) {
+          context.fillStyle = this.color;
+          context.shadowColor = this.color;
+          context.shadowBlur = 6;
+        } else {
+          context.fillStyle = `rgba(16, 185, 129, ${this.alpha})`;
+          context.shadowBlur = 0;
+        }
+        context.fill();
+      }
+    }
+
+    function initGrid() {
+      const dpr = window.devicePixelRatio || 1;
+      const parent = canvas.parentElement;
+      width = parent.offsetWidth; height = parent.offsetHeight;
+      canvas.width = width * dpr; canvas.height = height * dpr;
+      canvas.style.width = width + 'px'; canvas.style.height = height + 'px';
+      ctx.scale(dpr, dpr);
+      dots = [];
+      const cols = Math.ceil(width / spacing) + 1;
+      const rows = Math.ceil(height / spacing) + 1;
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          dots.push(new Dot(c * spacing, r * spacing));
+        }
+      }
+    }
+
+    let startTime = performance.now();
+    function animate(now) {
+      const elapsed = now - startTime;
+      mouse.x += (mouse.targetX - mouse.x) * 0.15;
+      mouse.y += (mouse.targetY - mouse.y) * 0.15;
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].update(mouse.x, mouse.y, elapsed);
+        dots[i].draw(ctx);
+      }
+      requestAnimationFrame(animate);
+    }
+
+    initGrid();
+    requestAnimationFrame(animate);
+
+    const parent = canvas.parentElement;
+    parent.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.targetX = e.clientX - rect.left;
+      mouse.targetY = e.clientY - rect.top;
+    });
+    parent.addEventListener('mouseleave', () => {
+      mouse.targetX = -9999; mouse.targetY = -9999;
+    });
+    window.addEventListener('resize', initGrid);
+  </script>
+</body>
+</html>
